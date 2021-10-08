@@ -1,13 +1,13 @@
 /**
  * @format
  */
-
+import {LogBox} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import InitializeScreens from './app.configurations/nav.config/initialize.screens';
-import {LibraryStack} from './app.configurations/nav.config/nav.stack';
-
+import {LibraryRootNavigationConfiguration} from './applications/library.application/_config_/navigation.configuration/navigationActions';
 InitializeScreens();
 
+LogBox.ignoreAllLogs(true);
 Navigation.setDefaultOptions({
   topBar: {
     visible: false,
@@ -25,5 +25,5 @@ Navigation.setDefaultOptions({
 });
 
 Navigation.events().registerAppLaunchedListener(() => {
-  LibraryStack();
+  LibraryRootNavigationConfiguration();
 });

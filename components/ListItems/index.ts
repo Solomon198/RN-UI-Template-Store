@@ -1,5 +1,5 @@
 import Ecommerce from './ecommerce/index';
-import CartItem from './cartitems/index';
+import CartItem from './cart.items/index';
 
 const ItemComponent = {
   Ecommerce,

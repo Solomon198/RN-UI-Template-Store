@@ -6,6 +6,7 @@ interface BooksReducerProps {
   fetchBooksError: string;
   page: number;
   selectedBook: BookProps;
+  lastFetched: any;
 }
 
 interface BookInCartProps extends BookProps {

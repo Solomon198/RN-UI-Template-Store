@@ -1,19 +1,26 @@
 import {StyleSheet} from 'react-native';
-import {Dimensions} from 'react-native';
 
-const {width} = Dimensions.get('window');
-const cardWidth = width / 2;
 const createStyle = (theme: theme.ApplicationTheme) => {
   const styles = StyleSheet.create({
+    imageWrapper: {
+      paddingVertical: 5,
+      backgroundColor: theme.theme.color.background,
+      marginHorizontal: 5,
+      borderRadius: 20,
+      marginTop: 3,
+    },
     card: {
-      backgroundColor: theme.color.foreground,
+      backgroundColor: theme.theme.color.foreground,
       minHeight: 200,
       margin: 10,
+      borderRadius: 20,
+      flex: 1,
     },
     cardImage: {
-      height: 150,
-      width: cardWidth - 20,
-      borderRadius: 20,
+      height: 140,
+      flex: 1,
+      marginVertical: 5,
+      marginHorizontal: 5,
     },
     entityInfo: {
       paddingHorizontal: 9,
@@ -22,10 +29,10 @@ const createStyle = (theme: theme.ApplicationTheme) => {
     title: {
       fontSize: 13,
       fontWeight: '400',
-      color: theme.color.text,
+      color: theme.theme.color.text,
     },
     price: {
-      color: theme.color.text,
+      color: theme.theme.color.text,
       fontWeight: 'bold',
     },
     cartItem: {},

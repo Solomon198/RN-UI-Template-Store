@@ -1,10 +1,11 @@
 const DEFAULT_LIGHT_COLOR_THEME = {
-  background: '#f4f4f4',
-  foreground: '#ffffff',
-  text: '#222222',
+  background: '#ffffff',
+  foreground: '#fbfbfb',
+  text: '#444',
   primary: '#d9534f',
   icon: '#222222',
   statusBar: 'gray',
+  secondary: '#808080',
 };
 
 const DEFAULT_LIGHT_SPACING_THEME = {

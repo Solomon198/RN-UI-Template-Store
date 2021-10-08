@@ -1,7 +1,10 @@
 interface BookProps {
-  id: string;
-  coverPhoto: string;
-  description: string;
+  _id: string;
+  images: string[];
+  description: {
+    descriptionHeader: string;
+    descriptionBody: string;
+  };
   author: string;
   title: string;
   price: string;

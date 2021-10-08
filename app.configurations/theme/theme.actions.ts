@@ -1,0 +1,4 @@
+export enum ThemeAction {
+  TOGGLE_THEME_CALLER = 'TOGGLE_THEME_CALLER',
+  TOGGLE_THEME = 'TOGGLE_THEME',
+}

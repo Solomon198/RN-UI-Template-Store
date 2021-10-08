@@ -1,21 +1,37 @@
 import {StyleSheet} from 'react-native';
+import {Dimensions} from 'react-native';
+const {height} = Dimensions.get('window');
 
 const createStyle = (theme: theme.ApplicationTheme) => {
   const styles = StyleSheet.create({
+    cartEmptyContainer: {
+      flex: 1,
+      alignSelf: 'center',
+      alignItems: 'center',
+      marginTop: height / 3,
+    },
+    emptyCartText: {
+      fontSize: 20,
+      fontWeight: '500',
+      color: theme.theme.color.primary,
+    },
     cartIcon: {
-      color: theme.color.text,
+      color: theme.theme.color.text,
     },
     cartHeader: {
       flexDirection: 'row',
       justifyContent: 'center',
       alignContent: 'center',
       alignItems: 'center',
-      marginVertical: 10,
+      marginBottom: 10,
+      marginTop: 20,
+      backgroundColor: theme.theme.color.background,
+      paddingVertical: 5,
     },
     cartText: {
       fontSize: 19,
       marginLeft: 5,
-      color: theme.color.text,
+      color: theme.theme.color.text,
     },
     card: {
       elevation: 0,
@@ -36,7 +52,7 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       marginTop: -30,
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
-      backgroundColor: theme.color.background,
+      backgroundColor: theme.theme.color.background,
     },
     bookInfo: {
       marginTop: 5,
@@ -48,13 +64,13 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       fontWeight: '600',
     },
     price: {
-      color: theme.color.text,
+      color: theme.theme.color.text,
       fontWeight: 'bold',
       fontSize: 18,
     },
     descriptionTitle: {
       marginTop: 15,
-      color: theme.color.text,
+      color: theme.theme.color.text,
       marginBottom: 5,
     },
     description: {

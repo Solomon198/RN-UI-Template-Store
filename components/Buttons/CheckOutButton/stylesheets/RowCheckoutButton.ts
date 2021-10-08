@@ -10,27 +10,39 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       alignContent: 'center',
       alignItems: 'center',
       margin: 5,
+      height: 60,
+      justifyContent: 'center',
     },
     containerItem: {
-      flex: 1,
       margin: 3,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 60,
+      borderRadius: 50,
+    },
+    totalPrice: {
+      fontSize: 10,
     },
     checkoutButton: {
-      backgroundColor: theme.color.primary,
+      backgroundColor: theme.theme.color.primary,
+      flex: 2,
     },
     checkoutButtonText: {
       color: '#ffffff',
       fontWeight: 'bold',
-      fontSize: 17,
+      fontSize: 15,
       letterSpacing: 1,
     },
     priceButton: {
-      backgroundColor: theme.color.foreground,
+      backgroundColor: theme.theme.color.background,
+      borderRadius: 50,
+      marginRight: -20,
+      flex: 3,
     },
     priceButtonText: {
-      color: theme.color.text,
+      color: theme.theme.color.text,
       fontWeight: '700',
-      fontSize: 17,
+      fontSize: 25,
     },
   });
 

@@ -5,6 +5,7 @@ const intialState: ReduxStore.Books = {
   fetchBooksError: '',
   page: 1,
   selectedBook: {} as entities.Book,
+  lastFetched: '',
 };
 
 function Reducer(state = intialState, action: any) {
@@ -40,6 +41,7 @@ function Reducer(state = intialState, action: any) {
         books: action.payload,
         fetchBookStatus: FetchBooks.FETCH_BOOK_SUCCESS,
         fetchBooksError: '',
+        lastFetched: new Date(),
         // page: state.page + 1,
       };
       return state;

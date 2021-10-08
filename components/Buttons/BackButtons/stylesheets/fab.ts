@@ -14,7 +14,7 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       position: 'absolute',
       width: 21,
       height: 21,
-      backgroundColor: theme.color.primary,
+      backgroundColor: theme.theme.color.primary,
       borderRadius: 100,
       justifyContent: 'center',
       alignContent: 'center',

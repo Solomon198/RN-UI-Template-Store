@@ -1,8 +1,12 @@
+/// <reference path="../theme/interfaces.d.ts" />
 /**
  * `placeholder` *string* - place holder of search header component
  */
 interface HeaderComponents {
+  context: ThemeObject;
   placeholder?: string;
+  onFocus?: () => void;
+  onAvatarPressed?: () => void;
 }
 
 /**
@@ -14,6 +18,8 @@ interface ListItemComponentProps {
   item: any;
   onPress?: (item: any) => void;
   onLongPress?: (item: any) => void;
+  adjustItemQuantity?: (book: entities.Book, isAdding: boolean) => void;
+  context: ThemeObject;
 }
 
 interface FlatListProps {

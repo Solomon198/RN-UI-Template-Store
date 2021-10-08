@@ -1,50 +1,47 @@
 import React from 'react';
-import {DEFAULT_DARK_THEME, DEFAULT_DARK_THEME_ID} from './dark.theme';
-import {DEFAULT_LIGHT_THEME, DEFAULT_LIGHT_THEME_ID} from './light.theme';
+import {DEFAULT_LIGHT_THEME} from './light.theme';
+import {ThemeAction} from './theme.actions';
+import {useSelector, useDispatch} from 'react-redux';
 
 // Creating our context
 // Important: the defined object here is only received by the
 // consumer components when there is no rendered context provider
 // in the view hierarchy, so basically it will provide
 // a fallback object
-const Context = React.createContext({
+export const ThemeContext = React.createContext({
   theme: DEFAULT_LIGHT_THEME,
   toggleTheme: () => {
     console.log('ThemeProvider is not rendered!');
   },
 });
 
-// Creating our stateful context provider
-// We are using React.memo for optimization
-export const ThemeProvider = React.memo((props: any) => {
-  // Store the actual theme as an internal state of the provider
-  const [theme, setTheme] = React.useState(props.initial);
-  // Implement a method for toggling the Theme
-  // We're using the React.useCallback hook for optimization
-  const ToggleThemeCallback = React.useCallback(() => {
-    setTheme((currentTheme: any) => {
-      if (currentTheme.id === DEFAULT_LIGHT_THEME_ID) {
-        return DEFAULT_DARK_THEME;
-      }
-      if (currentTheme.id === DEFAULT_DARK_THEME_ID) {
-        return DEFAULT_LIGHT_THEME;
-      }
-      return currentTheme;
-    });
-  }, []);
-  // Building up the provided object
-  // We're using the React.useMemo hook for optimization
-  const MemoizedValue = React.useMemo(() => {
+type Props = {
+  children: any;
+  toggleTheme: () => void;
+  theme?: theme.ApplicationTheme;
+};
+const ThemeProvider = React.memo((props: any) => {
+  const {theme} = useSelector((store: any) => ({
+    theme: store.Theme.theme,
+  }));
+  const dispatch = useDispatch();
+  const handleChangeTheme = React.useCallback(() => {
+    dispatch({type: ThemeAction.TOGGLE_THEME});
+  }, []); // eslint-disable-line
+
+  const memoizedValue = React.useMemo(() => {
     const value = {
-      theme,
-      toggleTheme: ToggleThemeCallback,
+      theme: theme,
+      toggleTheme: handleChangeTheme,
     };
     return value;
-  }, [theme, ToggleThemeCallback]);
-  // Render our context provider by passing it the value to provide
+  }, [theme, handleChangeTheme]);
+
   return (
-    <Context.Provider value={MemoizedValue}>{props.children}</Context.Provider>
+    <ThemeContext.Provider value={memoizedValue}>
+      {props.children}
+    </ThemeContext.Provider>
   );
 });
-// Creating a custom context consumer hook for function components
-export const useTheme = () => React.useContext(Context);
+
+export default ThemeProvider;

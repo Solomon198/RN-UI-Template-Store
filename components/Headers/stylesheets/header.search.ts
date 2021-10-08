@@ -1,22 +1,23 @@
 import {StyleSheet} from 'react-native';
 
 export const createStyle = (theme: theme.ApplicationTheme) => {
+  console.log(theme);
   const styles = StyleSheet.create({
-    // *********** NORMAL HEADER STYLES **************
+    // // *********** NORMAL HEADER STYLES **************
     title: {
-      color: theme.color.text,
+      color: theme.theme.color.text,
       fontSize: 17,
     },
     // ************** SEARCHEADER STYLES
     icon: {
-      color: theme.color.icon,
+      color: theme.theme.color.icon,
     },
     sideButtons: {
       backgroundColor: 'transparent',
     },
     header: {
       flexDirection: 'row',
-      backgroundColor: theme.color.foreground,
+      backgroundColor: theme.theme.color.foreground,
       borderRadius: 10,
       marginVertical: 10,
       marginHorizontal: 20,

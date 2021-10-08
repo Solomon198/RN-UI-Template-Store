@@ -10,7 +10,7 @@ const storage = new MMKVStorage.Loader().initialize();
 
 const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
-  key: 'root',
+  key: 'root2',
   storage,
 };
 

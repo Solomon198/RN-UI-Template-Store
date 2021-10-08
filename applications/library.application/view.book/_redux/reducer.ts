@@ -8,10 +8,19 @@ function Reducer(state = intialState, action: any) {
     case AddCart.ADD_TO_CART: {
       const carts = Object.assign([] as any[], state.carts) as any[];
       let itemExist = false;
-      carts.forEach((item: ReduxStore.BookInCart) => {
-        if (item.id === action.payload.id) {
-          item.count += 1;
-          itemExist = true;
+      carts.forEach((item: ReduxStore.BookInCart, index) => {
+        if (item._id === action.payload._id) {
+          if (action.isAdding) {
+            item.count += 1;
+            itemExist = true;
+          } else {
+            if (item.count > 1) {
+              item.count -= 1;
+            } else {
+              carts.splice(index, 1);
+            }
+            itemExist = true;
+          }
         }
       });
       if (!itemExist) {

@@ -5,6 +5,7 @@ const DEFAULT_DARK_COLOR_THEME = {
   primary: '#d9534f',
   icon: '#f4f4f4',
   statusBar: '#222222',
+  secondary: '#ffffff',
 };
 const DEFAULT_DARK_SPACING_THEME = {
   base: 8,

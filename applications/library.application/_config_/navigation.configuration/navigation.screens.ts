@@ -1,0 +1,12 @@
+enum NavigationScreens {
+  LIBRARY_DASHBOARD_SCREEN = 'stack.library.screen',
+  LIBRARY_BOOK_DETAIL_SCREEN = 'LIBRARY_BOOK_DETAIL_SCREEN',
+  LIBRARY_BOOK_CART_SCREEN = 'LIBRARY_BOOK_CART_SCREEN',
+  LIBRARY_BOOK_SEARCH_SCREEN = 'LIBRARY_BOOK_SEARCH_SCREEN',
+
+  //SIDE MENU SCREEN IDS
+  LIBARARY_SIDEMENU = 'stack.library.sidemenu',
+  LIBARARY_CENTER_ID = 'stack.library.center',
+}
+
+export default NavigationScreens;
