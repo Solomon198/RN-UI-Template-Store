@@ -1,17 +1,25 @@
 import React from 'react';
 import {Text} from 'native-base';
 import {View} from 'react-native-ui-lib';
+import {TouchableOpacity} from 'react-native';
 import createStyle from '../stylesheets/RowCheckoutButton';
 import {formatAmountWithComma} from '../../../../applications/utilities/helper.functions';
 
 type Props = {
   price?: number;
   context: ThemeObject;
+  onPress?: () => void;
 };
 const CheckoutComponent = (props: Props) => {
   const {styles} = createStyle(props.context);
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() => {
+        if (props.onPress) {
+          props.onPress();
+        }
+      }}
+      style={styles.container}>
       <View style={[styles.containerItem, styles.priceButton]}>
         <Text style={styles.totalPrice}>Total Amount</Text>
         <Text style={styles.priceButtonText}>
@@ -21,7 +29,7 @@ const CheckoutComponent = (props: Props) => {
       <View style={[styles.containerItem, styles.checkoutButton]}>
         <Text style={styles.checkoutButtonText}> Checkout</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

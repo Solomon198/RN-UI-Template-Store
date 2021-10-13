@@ -57,7 +57,7 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       color: theme.theme.color.text,
     },
     addCartButton: {
-      backgroundColor: '#d9534f',
+      backgroundColor: theme.theme.color.primary,
       marginHorizontal: 40,
       borderRadius: 10,
       marginBottom: 10,

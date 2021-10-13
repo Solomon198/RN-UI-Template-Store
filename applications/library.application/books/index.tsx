@@ -74,6 +74,7 @@ class Dashboard extends React.Component<Props> {
     return (
       <View style={defaultStyles.containerStyle}>
         <HeaderComponents.SearchHeader
+          onChangeText={() => ''}
           onFocus={() => {
             Keyboard.dismiss();
             handleNavigation(

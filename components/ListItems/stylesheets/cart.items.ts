@@ -7,6 +7,10 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       alignItems: 'center',
       flex: 1,
     },
+    authorName: {
+      fontWeight: '700',
+      marginBottom: 2,
+    },
     quantityContainer: {
       marginTop: 5,
       flexDirection: 'row',
@@ -59,7 +63,7 @@ const createStyle = (theme: theme.ApplicationTheme) => {
 
     connector: {
       height: 25,
-      backgroundColor: theme.theme.color.secondary,
+      backgroundColor: theme.theme.color.primary,
       width: 15,
     },
     icon: {
@@ -68,13 +72,13 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       marginLeft: 10,
     },
     iconContainer: {
-      backgroundColor: theme.theme.color.secondary,
+      backgroundColor: theme.theme.color.primary,
       width: 100,
       height: 100,
     },
     iconRight: {
       marginLeft: -6,
-      backgroundColor: theme.theme.color.secondary,
+      backgroundColor: theme.theme.color.primary,
       width: 40,
       height: 40,
       justifyContent: 'center',
@@ -83,7 +87,7 @@ const createStyle = (theme: theme.ApplicationTheme) => {
     },
     iconLeft: {
       marginRight: -6,
-      backgroundColor: theme.theme.color.secondary,
+      backgroundColor: theme.theme.color.primary,
       width: 40,
       height: 40,
       justifyContent: 'center',

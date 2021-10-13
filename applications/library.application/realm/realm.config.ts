@@ -21,6 +21,7 @@ const ProductSchema = {
     images: 'string[]',
     price: 'string?',
     pdf: 'string?',
+    id: 'int',
   },
 };
 
@@ -29,7 +30,7 @@ function getApp() {
     // @ts-ignore
     app = new realm({
       schema: [ProductSchema, DescriptionSchema],
-      schemaVersion: 1,
+      schemaVersion: 2,
     });
     return app;
   }
@@ -44,6 +45,7 @@ function saveProducts(products: any[]) {
     app.delete(obj);
     products.forEach((product: any) => {
       product._id = new realm.BSON.ObjectID();
+      product.id = parseInt(product.id);
       app.create(ProductSchema.name, product);
     });
   });
@@ -69,9 +71,8 @@ function getProducts() {
 
 function searchProduct(searchQuery: string) {
   let app = getApp();
-  let query =
-    'title CONTAINS[c] $0 || description.descriptionBody CONTAINS[c] $0 || enrolee_id CONTAINS[c] $0 || author CONTAINS[c]';
-
+  let query = 'title CONTAINS[c] $0 || author CONTAINS[c] $0';
+  // description.descriptionBody CONTAINS[c] $0 ||
   let products: realm.Results<realm.Object> = app
     .objects(ProductSchema.name)
     .filtered(query, searchQuery);

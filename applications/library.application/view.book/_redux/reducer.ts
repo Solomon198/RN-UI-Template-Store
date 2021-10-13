@@ -1,10 +1,14 @@
-import {AddCart} from './actions';
+import {AddCart, PaymentSuccess} from './actions';
 const intialState: ReduxStore.BooksCart = {
   carts: [],
 };
 
 function Reducer(state = intialState, action: any) {
   switch (action.type) {
+    case PaymentSuccess.PAYMENT_SUCCESS: {
+      state = {...state, carts: []};
+      return state;
+    }
     case AddCart.ADD_TO_CART: {
       const carts = Object.assign([] as any[], state.carts) as any[];
       let itemExist = false;

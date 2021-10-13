@@ -50,6 +50,7 @@ export const handleNavigation = (
       id: destinationScreen,
       name: destinationScreen,
       passProps: {
+        ...payload,
         selectedItem: payload,
       },
       options: {

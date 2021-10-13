@@ -11,7 +11,7 @@ type Props = {
   context: ThemeObject;
 };
 const FaBCartComponent = (props: Props) => {
-  const {styles} = createStyle(props.context);
+  const {styles, theme} = createStyle(props.context);
   return (
     <Fab
       style={styles.fab}
@@ -19,7 +19,11 @@ const FaBCartComponent = (props: Props) => {
       placement={props.placement || 'bottom-right'}
       icon={
         <View>
-          <Icon as={Ionicons} name="ios-cart-outline" />
+          <Icon
+            color={theme.theme.color.primary}
+            as={Ionicons}
+            name="ios-cart-outline"
+          />
           <View style={styles.fabBadge}>
             <Text style={styles.badgeText}>{props.count || 0}</Text>
           </View>

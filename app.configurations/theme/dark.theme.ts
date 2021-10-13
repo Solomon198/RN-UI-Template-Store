@@ -2,7 +2,7 @@ const DEFAULT_DARK_COLOR_THEME = {
   background: '#222222',
   foreground: '#444444',
   text: '#f4f4f4',
-  primary: '#d9534f',
+  primary: '#3E4095',
   icon: '#f4f4f4',
   statusBar: '#222222',
   secondary: '#ffffff',

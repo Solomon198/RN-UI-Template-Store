@@ -4,19 +4,25 @@ const {height} = Dimensions.get('window');
 
 const createStyle = (theme: theme.ApplicationTheme) => {
   const styles = StyleSheet.create({
+    headerLeft: {
+      width: 70,
+    },
     cartEmptyContainer: {
       flex: 1,
       alignSelf: 'center',
       alignItems: 'center',
       marginTop: height / 3,
     },
+    headerBody: {
+      flexDirection: 'row',
+      flexGrow: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     emptyCartText: {
       fontSize: 20,
       fontWeight: '500',
       color: theme.theme.color.primary,
-    },
-    cartIcon: {
-      color: theme.theme.color.text,
     },
     cartHeader: {
       flexDirection: 'row',
@@ -27,6 +33,8 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       marginTop: 20,
       backgroundColor: theme.theme.color.background,
       paddingVertical: 5,
+      borderBottomColor: 'lightgray',
+      borderBottomWidth: 1,
     },
     cartText: {
       fontSize: 19,

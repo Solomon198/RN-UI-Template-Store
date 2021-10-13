@@ -6,4 +6,6 @@ declare namespace component {
   type HeadersProps = HeaderComponents;
   type FlatList = FlatListProps;
   type ListItemProps = ListItemComponentProps;
+  type InfoComponentProps = InfoComponent;
+  type InputComponentProps = InputComponent;
 }

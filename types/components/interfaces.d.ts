@@ -5,7 +5,10 @@
 interface HeaderComponents {
   context: ThemeObject;
   placeholder?: string;
+  hideLeftItem?: boolean;
+  autoFocus?: boolean;
   onFocus?: () => void;
+  onChangeText: (text: string) => void;
   onAvatarPressed?: () => void;
 }
 
@@ -16,10 +19,28 @@ interface HeaderComponents {
  */
 interface ListItemComponentProps {
   item: any;
+  showAuthor?: boolean;
+  hideQuantityAdjustment?: boolean;
   onPress?: (item: any) => void;
   onLongPress?: (item: any) => void;
   adjustItemQuantity?: (book: entities.Book, isAdding: boolean) => void;
   context: ThemeObject;
+}
+
+interface InfoComponent {
+  label: string;
+  value: string;
+  context: ThemeObject;
+}
+
+interface InputComponent {
+  label: string;
+  value: string;
+  disabled?: boolean;
+  context: ThemeObject;
+  keyboardType?: any;
+  secureText?: boolean;
+  onChangeText: (text: string) => void;
 }
 
 interface FlatListProps {

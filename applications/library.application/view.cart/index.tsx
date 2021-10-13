@@ -13,6 +13,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {handleNavigation} from '../_config_/navigation.configuration/navigationActions';
 import {AddCart} from './_redux/actions';
 import NavigationScreens from '../_config_/navigation.configuration/navigation.screens';
+import BackButton from '../../../components/Buttons/BackButtons/index';
+import {Navigation} from 'react-native-navigation';
 
 const mapDispatchProps = (dispatch: any) => ({
   AdjustQuantity: (book: entities.Book, isAdding: boolean) =>
@@ -21,11 +23,13 @@ const mapDispatchProps = (dispatch: any) => ({
 
 const mapStateProps = (store: any) => ({
   carts: store.BooksCart.carts,
+  user: store.Profile.user,
 });
 
 type Props = {
   carts: ReduxStore.BookInCart[];
   componentId: string;
+  user: entities.User;
   viewSelectedBook: (book: entities.Book) => void;
   AdjustQuantity: (book: entities.Book, isAdding: boolean) => void;
 };
@@ -83,21 +87,44 @@ class ViewCarts extends React.Component<Props> {
     );
   }
 
+  checkout() {
+    if (this.props.user.email) {
+      return handleNavigation(
+        this.props.componentId,
+        NavigationScreens.LIBRARY_BOOKS_PAYMENT_SCREEN,
+      );
+    }
+    handleNavigation(
+      this.props.componentId,
+      NavigationScreens.LIBRARY_BOOKS_LOGIN_SCREEN,
+      {fromCheckout: true},
+    );
+  }
+
   render() {
     const defaultStyles = createStyle(this.context);
     const {styles, theme} = componentStyles(this.context);
     return (
       <View style={defaultStyles.containerStyle}>
         <StatusBar backgroundColor={theme.theme.color.statusBar} />
+
         <View style={styles.imageContainer}>
           <View style={styles.cartHeader}>
-            <Icon
-              // @ts-ignore
-              style={styles.cartIcon}
-              as={Ionicons}
-              name="ios-cart-outline"
-            />
-            <Text style={styles.cartText}>Cart</Text>
+            <View style={styles.headerLeft}>
+              <BackButton.NormalButton
+                context={this.context}
+                onPress={() => Navigation.pop(this.props.componentId)}
+              />
+            </View>
+            <View style={styles.headerBody}>
+              <Icon
+                as={Ionicons}
+                color={theme.theme.color.primary}
+                name="ios-cart-outline"
+              />
+              <Text style={styles.cartText}>Cart</Text>
+            </View>
+            <View style={styles.headerLeft} />
           </View>
           <ListComonents.FlatList
             adjustItemQuantity
@@ -109,9 +136,9 @@ class ViewCarts extends React.Component<Props> {
                   this.adjustQuantity(book, isAdding)
                 }
                 context={this.context}
-                onPress={() =>
-                  this.handleViewSelectedBook(item as entities.Book)
-                }
+                // onPress={() =>
+                //   this.handleViewSelectedBook(item as entities.Book)
+                // }
                 item={item}
               />
             )}
@@ -120,6 +147,7 @@ class ViewCarts extends React.Component<Props> {
         <CheckoutComponent.RowCheckoutButton
           context={this.context}
           price={this.getTotalSum()}
+          onPress={() => this.checkout()}
         />
       </View>
     );

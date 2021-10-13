@@ -10,7 +10,7 @@ type Props = {
   context: ThemeObject;
 };
 const FaBCartComponent = (props: Props) => {
-  const {styles} = createStyle(props.context);
+  const {styles, theme} = createStyle(props.context);
   return (
     <Fab
       style={styles.fab}
@@ -18,7 +18,11 @@ const FaBCartComponent = (props: Props) => {
       placement={props.placement || 'top-left'}
       icon={
         <View>
-          <Icon as={Ionicons} name="arrow-back" />
+          <Icon
+            color={theme.theme.color.primary}
+            as={Ionicons}
+            name="arrow-back"
+          />
         </View>
       }
     />

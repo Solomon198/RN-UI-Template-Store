@@ -2,7 +2,7 @@ const DEFAULT_LIGHT_COLOR_THEME = {
   background: '#ffffff',
   foreground: '#fbfbfb',
   text: '#444',
-  primary: '#d9534f',
+  primary: '#3E4095',
   icon: '#222222',
   statusBar: 'gray',
   secondary: '#808080',

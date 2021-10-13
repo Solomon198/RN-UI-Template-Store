@@ -2,8 +2,18 @@ import {StyleSheet} from 'react-native';
 
 const createStyle = (theme: theme.ApplicationTheme) => {
   const styles = StyleSheet.create({
+    searchContainer: {
+      flex: 1,
+    },
+    headerLeft: {
+      width: 50,
+      justifyContent: 'center',
+    },
     cartIcon: {
       color: theme.theme.color.text,
+    },
+    header: {
+      flexDirection: 'row',
     },
     cartHeader: {
       flexDirection: 'row',
@@ -68,6 +78,9 @@ const createStyle = (theme: theme.ApplicationTheme) => {
     buttonText: {
       color: '#fff',
       fontWeight: 'bold',
+    },
+    headerLine: {
+      marginTop: 20,
     },
   });
 

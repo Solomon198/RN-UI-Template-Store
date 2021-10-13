@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {FetchBooks, ViewSelectedBook} from './actions';
 const intialState: ReduxStore.Books = {
   books: [],
@@ -41,9 +42,11 @@ function Reducer(state = intialState, action: any) {
         books: action.payload,
         fetchBookStatus: FetchBooks.FETCH_BOOK_SUCCESS,
         fetchBooksError: '',
-        lastFetched: new Date(),
         // page: state.page + 1,
       };
+      if (action.resset) {
+        state.lastFetched = moment();
+      }
       return state;
     }
   }

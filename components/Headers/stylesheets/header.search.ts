@@ -20,7 +20,7 @@ export const createStyle = (theme: theme.ApplicationTheme) => {
       backgroundColor: theme.theme.color.foreground,
       borderRadius: 10,
       marginVertical: 10,
-      marginHorizontal: 20,
+      marginHorizontal: 10,
     },
     sideItems: {
       maxWidth: 50,

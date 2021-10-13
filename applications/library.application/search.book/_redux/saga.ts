@@ -1,36 +1,20 @@
-import {call, takeLeading, put} from 'redux-saga/effects';
-import API from './api';
-import {FetchBooks, ViewSelectedBook} from './actions';
-import {handleViewBook} from '../../_config_/navigation.configuration/navigationActions';
+import {takeLeading, put} from 'redux-saga/effects';
+import {SearchBook} from './actions';
+import RealmQueries from '../../realm/realm.config';
 
-function* watchGetBooks() {
-  yield takeLeading(FetchBooks.FETCH_BOOK_CALLER, function* () {
+function* watchSearchBook() {
+  yield takeLeading(SearchBook.SEARCH_BOOK_CALLER, function* (action: any) {
     try {
-      yield put({type: FetchBooks.FETCH_BOOK_STARTED});
+      yield put({type: SearchBook.SEARCH_BOOK_STARTED});
       // @ts-ignore
-      const books = yield call(API.GetBooks.bind(null));
-      yield put({type: FetchBooks.FETCH_BOOK_SUCCESS, payload: books});
+      const books = RealmQueries.searchProduct(action.payload);
+      yield put({type: SearchBook.SEARCH_BOOK_SUCCESS, payload: books});
     } catch (e: any) {
-      yield put({type: FetchBooks.FETCH_BOOK_FAILED, payload: e.message});
+      yield put({type: SearchBook.SEARCH_BOOK_FAILED, payload: e.message});
     }
   });
 }
 
-function* watchSetSelectedBook() {
-  yield takeLeading(
-    ViewSelectedBook.SET_SELECTED_VIEW_CALLER,
-    function* (action: ReduxStore.sagaAction) {
-      yield put({
-        type: ViewSelectedBook.SET_SELECTED_VIEW,
-        payload: action.payload,
-      });
-
-      handleViewBook();
-    },
-  );
-}
-
 export default {
-  watchGetBooks,
-  watchSetSelectedBook,
+  watchSearchBook,
 };
