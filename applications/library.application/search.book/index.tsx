@@ -3,7 +3,7 @@ import {View} from 'react-native-ui-lib';
 import {createStyle} from '../../default.styles/styles';
 import componentStyles from './stylesheet';
 import {ThemeContext} from '../../../app.configurations/theme/theme.ui.context';
-import {StatusBar} from 'react-native';
+import {StatusBar, Text} from 'react-native';
 import ListComonents from '../../../components/List/index';
 import ItemComponent from '../../../components/ListItems/index';
 import {connect} from 'react-redux';
@@ -15,21 +15,25 @@ import {handleNavigation} from '../_config_/navigation.configuration/navigationA
 import NavigationScreens from '../_config_/navigation.configuration/navigation.screens';
 
 const mapDispatchProps = (dispatch: any) => ({
-  SearchBook: (searchString: string) =>
-    dispatch({type: SearchBook.SEARCH_BOOK_CALLER, payload: searchString}),
+  SearchBook: (queryParams: entities.queryParams) =>
+    dispatch({type: SearchBook.SEARCH_BOOK_CALLER, queryParams}),
 });
 
 const mapStateProps = (store: any) => ({
   searchResult: store.Search.searchResult,
+  searchStatus: store.Search.searchStatus,
 });
 
 type Props = {
   searchResult: entities.Book[];
   componentId: string;
-  SearchBook: (searchString: string) => void;
+  searchStatus: string;
+  SearchBook: (queryParams: entities.queryParams) => void;
 };
 
 class ViewCarts extends React.Component<Props> {
+  searchString: string = '';
+  timer: any;
   handleViewSelectedBook(book: entities.Book) {
     handleNavigation(
       this.props.componentId,
@@ -38,9 +42,22 @@ class ViewCarts extends React.Component<Props> {
     );
   }
 
+  handleInput(text: string) {
+    this.searchString = text;
+    if (this.timer) {
+      this.props.SearchBook({per_page: 50, search: this.searchString});
+      clearTimeout(this.timer);
+    }
+    this.timer = setTimeout(() => {
+      clearTimeout(this.timer);
+    }, 500);
+  }
+
   render() {
     const defaultStyles = createStyle(this.context);
     const {styles, theme} = componentStyles(this.context);
+    const isSearching =
+      this.props.searchStatus === SearchBook.SEARCH_BOOK_STARTED;
     return (
       <View style={defaultStyles.containerStyle}>
         <StatusBar backgroundColor={theme.theme.color.statusBar} />
@@ -54,14 +71,25 @@ class ViewCarts extends React.Component<Props> {
           </View>
           <View style={styles.searchContainer}>
             <HeaderComponents.SearchHeader
-              onChangeText={text => this.props.SearchBook(text)}
+              onChangeText={text => this.handleInput(text)}
               hideLeftItem
               autoFocus
+              isSearching={isSearching}
               context={this.context}
               placeholder="Search by author or title"
             />
           </View>
         </View>
+        {this.searchString.trim() &&
+        this.props.searchResult.length === 0 &&
+        !isSearching ? (
+          <View style={styles.searchResultContainer}>
+            <Text>
+              Could not find search result for :{' '}
+              <Text style={styles.searchString}>{this.searchString}</Text>
+            </Text>
+          </View>
+        ) : null}
         <View style={styles.imageContainer}>
           <ListComonents.FlatList
             adjustItemQuantity

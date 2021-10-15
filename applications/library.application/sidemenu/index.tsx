@@ -52,6 +52,12 @@ class ViewCarts extends React.Component<Props> {
         iconType: FontAwesome5,
       },
       {
+        routeName: 'Book categories',
+        componentId: NavigationScreens.LIBRARY_BOOKS_CATEGORIES_SCREEN,
+        iconName: 'list-ul',
+        iconType: FontAwesome5,
+      },
+      {
         routeName: 'About IEC',
         componentId: NavigationScreens.LIBRARY_BOOKS_ABOUT_SCREEN,
         iconName: 'infocirlce',

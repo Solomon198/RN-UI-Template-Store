@@ -30,6 +30,10 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       borderRadius: 10,
       marginVertical: 10,
     },
+    signUpBtn: {
+      borderRadius: 10,
+      marginVertical: 10,
+    },
     cartEmptyContainer: {
       flex: 1,
       alignSelf: 'center',

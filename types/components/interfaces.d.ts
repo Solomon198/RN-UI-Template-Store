@@ -7,6 +7,8 @@ interface HeaderComponents {
   placeholder?: string;
   hideLeftItem?: boolean;
   autoFocus?: boolean;
+  isSearching?: boolean;
+  categories?: entities.BookCategories[];
   onFocus?: () => void;
   onChangeText: (text: string) => void;
   onAvatarPressed?: () => void;

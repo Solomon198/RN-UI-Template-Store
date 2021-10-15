@@ -4,9 +4,17 @@ interface BooksReducerProps {
   books: BookProps[];
   fetchBookStatus: string;
   fetchBooksError: string;
-  page: number;
+  isRefreshing: boolean;
   selectedBook: BookProps;
   lastFetched: any;
+  queryParams: {
+    page: number;
+    search: string;
+    category: string;
+    per_page: number;
+    hasNextPage: boolean;
+  };
+  categories: BookCategoriesProps[];
 }
 
 interface BookInCartProps extends BookProps {

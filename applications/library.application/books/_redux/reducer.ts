@@ -4,9 +4,17 @@ const intialState: ReduxStore.Books = {
   books: [],
   fetchBookStatus: FetchBooks.FETCH_BOOK_DEFAULT,
   fetchBooksError: '',
-  page: 1,
   selectedBook: {} as entities.Book,
   lastFetched: '',
+  isRefreshing: false,
+  categories: [] as entities.BookCategories[],
+  queryParams: {
+    page: 1,
+    search: '',
+    category: '',
+    per_page: 20,
+    hasNextPage: true,
+  },
 };
 
 function Reducer(state = intialState, action: any) {
@@ -39,10 +47,14 @@ function Reducer(state = intialState, action: any) {
     case FetchBooks.FETCH_BOOK_SUCCESS: {
       state = {
         ...state,
-        books: action.payload,
+        books: action.isRefreshing
+          ? action.payload
+          : [...state.books, ...action.payload],
         fetchBookStatus: FetchBooks.FETCH_BOOK_SUCCESS,
         fetchBooksError: '',
-        // page: state.page + 1,
+        queryParams: action.queryParams,
+        isRefreshing: action.isRefreshing,
+        categories: action.categories,
       };
       if (action.resset) {
         state.lastFetched = moment();

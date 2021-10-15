@@ -13,8 +13,8 @@ import BackButton from '../../../components/Buttons/BackButtons/index';
 import {Navigation} from 'react-native-navigation';
 
 const mapDispatchProps = (dispatch: any) => ({
-  fetchOrders: (userId: string) =>
-    dispatch({type: FetchOrders.FETCH_ORDERS_CALLER, payload: userId}),
+  fetchOrders: (email: string) =>
+    dispatch({type: FetchOrders.FETCH_ORDERS_CALLER, payload: email}),
 });
 
 const mapStateProps = (store: any) => ({
@@ -28,7 +28,7 @@ type Props = {
   user: entities.User;
   orders: entities.Order[];
   fetchOrderStatus: string;
-  fetchOrders: (userId: string) => void;
+  fetchOrders: (email: string) => void;
 };
 
 class ViewOrder extends React.Component<Props> {

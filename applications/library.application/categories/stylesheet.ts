@@ -2,6 +2,15 @@ import {StyleSheet} from 'react-native';
 
 const createStyle = (theme: theme.ApplicationTheme) => {
   const styles = StyleSheet.create({
+    emptyText: {
+      fontWeight: '500',
+      color: theme.theme.color.primary,
+    },
+    emptyComponent: {
+      padding: 20,
+      marginTop: 150,
+      alignItems: 'center',
+    },
     searchContainer: {
       flex: 1,
     },

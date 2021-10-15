@@ -5,6 +5,7 @@ import {ThemeContext} from '../../../app.configurations/theme/theme.ui.context';
 
 import {createStyle} from '../../default.styles/styles';
 import HeaderComponents from '../../../components/Headers/index';
+import FooterComponents from '../../../components/Footers/index';
 import ListComonents from '../../../components/List/index';
 import ItemComponent from '../../../components/ListItems/index';
 import CartComponents from '../../../components/Buttons/Carts/index';
@@ -16,15 +17,24 @@ import {
 import NavigationScreens from '../_config_/navigation.configuration/navigation.screens';
 import {connect} from 'react-redux';
 import {RefreshControl, Keyboard} from 'react-native';
+import {
+  DefaultQueryParams,
+  getNewQueryParams,
+} from '../../utilities/helper.functions';
 
 type Props = {
   books: any[];
   fetchBookStatus: string;
   fetchBooksError: string;
+  isRefreshing: boolean;
   carts: ReduxStore.BookInCart[];
   componentId: string;
   lastFetched: string;
-  fetchBooks: (lastFetched: any) => void;
+  queryParams: entities.queryParams;
+  fetchBooks: (
+    queryParams: entities.queryParams,
+    isRefreshing?: boolean,
+  ) => void;
   viewSelectedBook: (book: entities.Book) => void;
 };
 const mapStateProps = (store: any) => ({
@@ -33,11 +43,13 @@ const mapStateProps = (store: any) => ({
   fetchBooksError: store.Books.fetchBooksError,
   carts: store.BooksCart.carts,
   lastFetched: store.Books.lastFetched,
+  isRefreshing: store.Books.isRefreshing,
+  queryParams: store.Books.queryParams,
 });
 
 const mapDispatchProps = (dispatch: any) => ({
-  fetchBooks: (lastFetched: any) =>
-    dispatch({type: FetchBooks.FETCH_BOOK_CALLER, payload: lastFetched}),
+  fetchBooks: (queryParams: entities.queryParams, isRefreshing?: boolean) =>
+    dispatch({type: FetchBooks.FETCH_BOOK_CALLER, queryParams, isRefreshing}),
   viewSelectedBook: (book: entities.Book) =>
     dispatch({
       type: ViewSelectedBook.SET_SELECTED_VIEW_CALLER,
@@ -46,9 +58,27 @@ const mapDispatchProps = (dispatch: any) => ({
 });
 
 class Dashboard extends React.Component<Props> {
+  state = {
+    isRefreshing: false,
+  };
   componentDidMount() {
-    this.props.fetchBooks(this.props.lastFetched);
     SplashScreen.hide();
+    this.handleFetchBookInit();
+  }
+
+  handleFetchBookInit() {
+    this.props.fetchBooks(DefaultQueryParams, true);
+    this.setState({isRefreshing: true});
+  }
+
+  handleNextCall() {
+    if (!this.props.queryParams.hasNextPage) return false;
+    let {page} = this.props.queryParams;
+    const queryParams = getNewQueryParams(this.props.queryParams, {
+      page: page && ++page,
+    });
+    this.props.fetchBooks(queryParams);
+    this.setState({isRefreshing: false});
   }
 
   getTotalAmountInCart() {
@@ -90,7 +120,20 @@ class Dashboard extends React.Component<Props> {
         />
         <ListComonents.FlatList
           isRef
-          refreshControl={<RefreshControl refreshing={listLoading} />}
+          ListFooterComponent={
+            listLoading &&
+            this.props.books.length > 0 && (
+              <FooterComponents.FlatListFooter context={this.context} />
+            )
+          }
+          onEndReachedThreshold={0.5}
+          onEndReached={() => this.handleNextCall()}
+          refreshControl={
+            <RefreshControl
+              onRefresh={() => this.handleFetchBookInit()}
+              refreshing={listLoading && this.state.isRefreshing}
+            />
+          }
           data={this.props.books || []}
           numColumns={2}
           renderItem={({item}: any) => (

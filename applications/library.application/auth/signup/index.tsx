@@ -56,6 +56,7 @@ class SignUp extends React.Component<Props> {
     state: '',
     password: '',
     phoneNumber: '',
+    userName: '',
   };
 
   componentDidMount() {
@@ -76,6 +77,7 @@ class SignUp extends React.Component<Props> {
       state,
       password,
       phoneNumber,
+      userName,
     } = this.state;
     const data: any = {
       first_name: firstName,
@@ -109,7 +111,7 @@ class SignUp extends React.Component<Props> {
       data.password = password;
       data.email = email;
       data.billing.email = email;
-      data.username = `${firstName}.${lastName}`;
+      data.username = userName;
     }
 
     if (!isLoggedIn) {
@@ -136,6 +138,7 @@ class SignUp extends React.Component<Props> {
       state,
       password,
       phoneNumber,
+      userName,
     } = this.state;
     if (state && !isLoggedIn) {
       Nigeria.forEach($state => {
@@ -184,6 +187,15 @@ class SignUp extends React.Component<Props> {
                 context={this.context}
                 label={'Last name'}
                 value={lastName}
+              />
+            </View>
+
+            <View style={styles.item}>
+              <ContainerComponent.InputContainer
+                onChangeText={text => this.setInput('userName', text)}
+                context={this.context}
+                label={'User name'}
+                value={userName}
               />
             </View>
 

@@ -35,3 +35,18 @@ interface OrderProps {
     price: string;
   }[];
 }
+
+interface queryParamsProps {
+  page?: number;
+  search?: string;
+  category?: string;
+  per_page?: number;
+  hasNextPage?: boolean;
+  customer?: number;
+}
+
+interface BookCategoriesProps {
+  name: string;
+  count: number;
+  id: number;
+}

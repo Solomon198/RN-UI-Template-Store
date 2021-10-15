@@ -10,8 +10,11 @@ import {connect} from 'react-redux';
 import BackButton from '../../../../components/Buttons/BackButtons/index';
 import SpinKit from 'react-native-spinkit';
 import {Navigation} from 'react-native-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Login} from './_redux/actions';
+import {handleNavigation} from '../../_config_/navigation.configuration/navigationActions';
+import NavigationScreens from '../../_config_/navigation.configuration/navigation.screens';
 
 const mapDispatchProps = (dispatch: any) => ({
   login: (data: any, fromCheckout: boolean) =>
@@ -91,6 +94,7 @@ class LoginScreen extends React.Component<Props> {
             />
           </View>
           <Button
+            disabled={!password.trim() && !email.trim()}
             onPress={() => this.doLogin()}
             endIcon={
               isLoading ? (
@@ -101,6 +105,17 @@ class LoginScreen extends React.Component<Props> {
             }
             style={styles.editProfileBtn}>
             <Text style={styles.buttonText}>Login</Text>
+          </Button>
+          <Button
+            onPress={() =>
+              handleNavigation(
+                this.props.componentId,
+                NavigationScreens.LIBRARY_BOOKS_SIGNUP_SCREEN,
+              )
+            }
+            endIcon={<Icon as={Ionicons} name="ios-create-outline" />}
+            style={styles.signUpBtn}>
+            <Text style={styles.buttonText}>Create Account</Text>
           </Button>
         </View>
       </View>

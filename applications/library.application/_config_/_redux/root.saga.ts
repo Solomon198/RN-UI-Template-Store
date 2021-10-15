@@ -8,9 +8,12 @@ import ProfileSaga from '../../profile/_redux/saga';
 import LoginSaga from '../../auth/login/_redux/saga';
 import PaymentSaga from '../../payment/_redux/saga';
 import OrderSaga from '../../view.order/_redux/saga';
+import CategorieSaga from '../../categories/_redux/saga';
 
 export default function* rootSaga() {
   yield all([
+    CategorieSaga.watchGetBookByCategory(),
+
     OrderSaga.watchFetchOrders(),
 
     PaymentSaga.watchPayment(),

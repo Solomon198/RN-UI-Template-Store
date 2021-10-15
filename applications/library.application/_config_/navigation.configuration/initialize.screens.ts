@@ -13,6 +13,7 @@ import SignupScreen from '../../auth/signup/index';
 import PaymentScreen from '../../payment/index';
 import ProfileScreen from '../../profile/index';
 import LoginScreen from '../../auth/login';
+import CategoriesScreen from '../../categories/index';
 
 const {store, persistor} = StoreConfig();
 
@@ -24,6 +25,16 @@ export default function InitializeLibraryAppScreens() {
   Navigation.registerComponent(
     NavigationScreens.LIBRARY_BOOKS_ABOUT_SCREEN,
     () => IntializeComponentWithProviders(store, persistor, AboutScreen) as any,
+  );
+
+  Navigation.registerComponent(
+    NavigationScreens.LIBRARY_BOOKS_CATEGORIES_SCREEN,
+    () =>
+      IntializeComponentWithProviders(
+        store,
+        persistor,
+        CategoriesScreen,
+      ) as any,
   );
 
   Navigation.registerComponent(

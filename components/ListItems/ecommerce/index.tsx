@@ -31,7 +31,7 @@ export default function RenderEcommerceItem(props: component.ListItemProps) {
             ellipsizeMode: 'tail',
           },
           {
-            text: `₦ ${formatAmountWithComma(entitity.price)}`,
+            text: `₦${formatAmountWithComma(entitity.price)}`,
             style: styles.price,
           },
         ]}

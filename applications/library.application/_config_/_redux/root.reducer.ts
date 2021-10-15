@@ -8,6 +8,7 @@ import SignUpReducer from '../../auth/signup/_redux/reducer';
 import LoginReducer from '../../auth/login/_redux/reducer';
 import PaymentReducer from '../../payment/_redux/reducer';
 import OrderReducer from '../../view.order/_redux/reducer';
+import CategorieReducer from '../../categories/_redux/reducer';
 
 const rootReducer = combineReducers({
   Books: BooksReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   Login: LoginReducer,
   Payment: PaymentReducer,
   Orders: OrderReducer,
+  Categorie: CategorieReducer,
 });
 
 export default rootReducer;

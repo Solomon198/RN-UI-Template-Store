@@ -48,7 +48,7 @@ function ExtractBookDescription(htmlString: string) {
     getListItems.shift();
 
     return {
-      descriptionBody: JSON.stringify(getListItems),
+      descriptionBody: getListItems.join(', \n'),
       descriptionHeader,
     };
   } catch {
@@ -136,6 +136,15 @@ export function multiFormatBooksProperties(books: any[]) {
     formattedBooks.push(formatBookProperties(book) as any);
   });
   return formattedBooks;
+}
+
+export function formatCategories(data: any[]) {
+  const categories: entities.BookCategories[] = data.map(item => ({
+    name: item.name,
+    count: item.count,
+    id: item.id,
+  }));
+  return categories;
 }
 
 export function exchangeCustomerDataForm(data: any) {
