@@ -8,7 +8,6 @@ import HeaderComponents from '../../../components/Headers/index';
 import FooterComponents from '../../../components/Footers/index';
 import ListComonents from '../../../components/List/index';
 import ItemComponent from '../../../components/ListItems/index';
-import CartComponents from '../../../components/Buttons/Carts/index';
 import {FetchBooks, ViewSelectedBook} from './_redux/actions';
 import {
   handleNavigation,
@@ -144,7 +143,7 @@ class Dashboard extends React.Component<Props> {
             />
           )}
         />
-        <CartComponents.FabCart
+        {/* <CartComponents.FabCart
           context={this.context} // theme context
           count={this.getTotalAmountInCart()}
           onPress={() =>
@@ -153,7 +152,7 @@ class Dashboard extends React.Component<Props> {
               NavigationScreens.LIBRARY_BOOK_CART_SCREEN,
             )
           }
-        />
+        /> */}
       </View>
     );
   }

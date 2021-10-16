@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Image, TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
 import {
   View,
   //  Switch
@@ -9,11 +9,13 @@ import {ThemeContext} from '../../../app.configurations/theme/theme.ui.context';
 import ComponentStyle from './stylesheet';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {Icon, Button} from 'native-base';
+import {Icon} from 'native-base';
 import {Logout} from '../profile/_redux/actions';
 import {
   handleNavigation,
+  OpenBrowser,
   ToggleNavigation,
 } from '../_config_/navigation.configuration/navigationActions';
 import {connect} from 'react-redux';
@@ -40,18 +42,6 @@ class ViewCarts extends React.Component<Props> {
   render() {
     const routes = [
       {
-        routeName: 'Account',
-        componentId: NavigationScreens.LIBRARY_BOOKS_PROFILE_SCREEN,
-        iconName: 'account-box',
-        iconType: MaterialCommunityIcons,
-      },
-      {
-        routeName: 'Orders',
-        componentId: NavigationScreens.LIBRARY_BOOKS_ORDERSCREEN,
-        iconName: 'list-alt',
-        iconType: FontAwesome5,
-      },
-      {
         routeName: 'Book categories',
         componentId: NavigationScreens.LIBRARY_BOOKS_CATEGORIES_SCREEN,
         iconName: 'list-ul',
@@ -64,8 +54,9 @@ class ViewCarts extends React.Component<Props> {
         iconType: AntDesign,
       },
     ];
+
     const {styles, theme} = ComponentStyle(this.context);
-    const isLoggedIn = Object.keys(this.props.user).length > 0;
+    // const isLoggedIn = Object.keys(this.props.user).length > 0;
     return (
       <View style={styles.container}>
         <View style={styles.imageContainer}>
@@ -76,6 +67,58 @@ class ViewCarts extends React.Component<Props> {
             source={require('../../../assets/images/iec.jpg')}
           />
         </View>
+
+        <TouchableOpacity
+          onPress={() => OpenBrowser('https://iecbooks.com/my-account/')}
+          style={styles.listItems}>
+          <View style={styles.leftItem}>
+            <Icon
+              size={6}
+              color={theme.theme.color.primary}
+              as={MaterialCommunityIcons}
+              name="account-box"
+            />
+          </View>
+          <View style={styles.body}>
+            <Text style={styles.routeName}>Account</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() =>
+            OpenBrowser('https://iecbooks.com/my-account-2/orders/')
+          }
+          style={styles.listItems}>
+          <View style={styles.leftItem}>
+            <Icon
+              size={6}
+              color={theme.theme.color.primary}
+              as={FontAwesome5}
+              name="list-alt"
+            />
+          </View>
+          <View style={styles.body}>
+            <Text style={styles.routeName}>Orders</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() =>
+            OpenBrowser('https://iecbooks.com/my-account-2/downloads/')
+          }
+          style={styles.listItems}>
+          <View style={styles.leftItem}>
+            <Icon
+              size={6}
+              color={theme.theme.color.primary}
+              as={FontAwesome}
+              name="download"
+            />
+          </View>
+          <View style={styles.body}>
+            <Text style={styles.routeName}>Downloads</Text>
+          </View>
+        </TouchableOpacity>
 
         <View style={styles.list}>
           {routes.map(item => (
@@ -97,7 +140,7 @@ class ViewCarts extends React.Component<Props> {
           ))}
         </View>
 
-        {isLoggedIn && (
+        {/* {isLoggedIn && (
           <Button
             onPress={() =>
               Alert.alert('', 'Are you sure you want to logout ?', [
@@ -118,9 +161,9 @@ class ViewCarts extends React.Component<Props> {
             style={styles.editProfileBtn}>
             <Text style={styles.buttonText}>Logout</Text>
           </Button>
-        )}
+        )} */}
 
-        {!isLoggedIn && (
+        {/* {!isLoggedIn && (
           <Button
             onPress={() => {
               ToggleNavigation(false, NavigationScreens.LIBARARY_CENTER_ID);
@@ -134,7 +177,7 @@ class ViewCarts extends React.Component<Props> {
             style={styles.editProfileBtn}>
             <Text style={styles.buttonText}>Login</Text>
           </Button>
-        )}
+        )} */}
       </View>
     );
   }

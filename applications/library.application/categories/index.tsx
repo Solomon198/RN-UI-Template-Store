@@ -95,9 +95,7 @@ class Categories extends React.Component<Props> {
   listEmptyComponent(style: any) {
     return (
       <View style={style.emptyComponent}>
-        <Text style={style.emptyText}>
-          No books found for catgorie selected
-        </Text>
+        <Text style={style.emptyText}>No books found for catgory selected</Text>
       </View>
     );
   }
@@ -128,7 +126,7 @@ class Categories extends React.Component<Props> {
               autoFocus
               isSearching={isSearching && this.props.books.length <= perPage}
               context={this.context}
-              placeholder="Select a categorie"
+              placeholder="Select a category"
             />
           </View>
         </View>

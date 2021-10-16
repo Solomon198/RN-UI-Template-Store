@@ -22,7 +22,6 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       fontSize: 14,
     },
     list: {
-      marginTop: 30,
       flex: 5,
     },
     leftItem: {

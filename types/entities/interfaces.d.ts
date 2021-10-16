@@ -9,6 +9,7 @@ interface BookProps {
   title: string;
   price: string;
   id: string;
+  link: string;
 }
 
 interface UserProps {

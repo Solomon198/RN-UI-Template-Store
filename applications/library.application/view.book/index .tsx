@@ -7,13 +7,12 @@ import {Button, Text, Icon} from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import BackButton from '../../../components/Buttons/BackButtons/index';
 import {Navigation} from 'react-native-navigation';
-import CartComponents from '../../../components/Buttons/Carts/index';
+// import CartComponents from '../../../components/Buttons/Carts/index';
 import {AddCart} from './_redux/actions';
-import {handleNavigation} from '../_config_/navigation.configuration/navigationActions';
 import {connect} from 'react-redux';
 import {formatAmountWithComma} from '../../utilities/helper.functions';
 import {ThemeContext} from '../../../app.configurations/theme/theme.ui.context';
-import NavigationScreens from '../_config_/navigation.configuration/navigation.screens';
+import {OpenBrowser} from '../_config_/navigation.configuration/navigationActions';
 
 type Props = {
   componentId: string;
@@ -93,21 +92,10 @@ class ViewBook extends React.Component<Props> {
                 },
               ]}
             />
-
-            <CartComponents.FabCart
-              context={this.context}
-              onPress={() =>
-                handleNavigation(
-                  this.props.componentId,
-                  NavigationScreens.LIBRARY_BOOK_CART_SCREEN,
-                )
-              }
-              count={this.getTotalAmountInCart()}
-            />
           </Card>
         </ScrollView>
         <Button
-          onPress={() => this.props.handleAddToCart(selectedItem)}
+          onPress={() => OpenBrowser(selectedItem.link)}
           endIcon={<Icon as={Ionicons} name="ios-cart-outline" />}
           style={styles.addCartButton}>
           <Text style={styles.buttonText}>Add to Cart</Text>

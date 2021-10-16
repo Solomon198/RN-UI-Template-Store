@@ -1,5 +1,10 @@
 import NavigationScreens from './navigation.screens';
 import {Navigation} from 'react-native-navigation';
+import * as WebBrowser from 'expo-web-browser';
+
+export const OpenBrowser = async (url: string) => {
+  WebBrowser.openBrowserAsync(url);
+};
 
 export function ToggleNavigation(state: boolean, componentId: any) {
   Navigation.mergeOptions(componentId, {

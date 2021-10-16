@@ -127,6 +127,7 @@ export function formatBookProperties(book: any) {
     price: book.price,
     pdf: ExtractPreviewUrl(bookDescription),
     id: book.id,
+    link: book.permalink,
   };
 }
 
