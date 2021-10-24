@@ -35,7 +35,7 @@ export default function RenderEcommerceItem(props: component.ListItemProps) {
               style: styles.title,
             },
             {
-              text: `₦ ${formatAmountWithComma(entitity.total)}`,
+              text: `₦${formatAmountWithComma(entitity.total)}`,
               style: styles.price,
             },
           ]}

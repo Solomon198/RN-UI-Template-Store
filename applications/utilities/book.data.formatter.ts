@@ -1,19 +1,55 @@
+const htmlSyntax = [
+  '<p>',
+  '</p>',
+  '<strong>',
+  '</strong>',
+  '&nbsp;',
+  '<li>',
+  '</li>',
+  '<ul>',
+  '</ul>',
+];
+export function formatString(htmlString: string) {
+  let done = false;
+  let pos = 0;
+  while (!done) {
+    let searchSyntax = htmlString.indexOf(htmlSyntax[pos]);
+    if (searchSyntax >= 0) {
+      htmlString = htmlString.replace(htmlSyntax[pos], ' ');
+    } else {
+      if (pos !== htmlSyntax.length) {
+        pos++;
+      } else {
+        done = true;
+        continue;
+      }
+    }
+  }
+  return htmlString;
+}
+
 function ExtractBookDescription(htmlString: string) {
   try {
+    let searchAboutBook = 'ABOUT THE BOOK';
+    let findAboutBookIndex = htmlString.indexOf(searchAboutBook);
     let lastOpeningStrong = htmlString.lastIndexOf('<strong>');
     let lastClosingStrong = htmlString.lastIndexOf('</strong>');
-    let descriptionHeader = htmlString
-      .substring(lastOpeningStrong, lastClosingStrong)
-      .replace('<strong>', '')
-      .replace('<br />', '')
-      .replace('\n', '');
-
-    let getDescription = htmlString.indexOf('<p>', lastClosingStrong);
+    let descriptionHeader =
+      findAboutBookIndex === -1
+        ? htmlString
+            .substring(lastOpeningStrong, lastClosingStrong)
+            .replace('<strong>', '')
+            .replace('<br />', '')
+            .replace('\n', '')
+        : searchAboutBook;
+    let concludeWhatIndexToUse =
+      findAboutBookIndex === -1 ? lastClosingStrong : findAboutBookIndex;
+    let getDescription = htmlString.indexOf('<p>', concludeWhatIndexToUse);
     if (getDescription >= 0) {
       // The next paragraph <p> starts the book description so we get the position of the next paragraph opening tag <p> starting from the position we found ABOUT THE BOOK
       const beginingOfDescription = htmlString.indexOf(
         '<p>',
-        lastClosingStrong,
+        concludeWhatIndexToUse,
       );
       // use substring to get the description part of the html string which will return the description in an html format in p tag e.g <p> description goes here  </p>
       const descriptionWithHtml = htmlString.substring(

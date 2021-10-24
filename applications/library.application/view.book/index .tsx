@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import {formatAmountWithComma} from '../../utilities/helper.functions';
 import {ThemeContext} from '../../../app.configurations/theme/theme.ui.context';
 import {OpenBrowser} from '../_config_/navigation.configuration/navigationActions';
+import {formatString} from '../../utilities/book.data.formatter';
 
 type Props = {
   componentId: string;
@@ -79,7 +80,7 @@ class ViewBook extends React.Component<Props> {
                   style: styles.title,
                 },
                 {
-                  text: `₦ ${formatAmountWithComma(selectedItem.price)}`,
+                  text: `₦${formatAmountWithComma(selectedItem.price)}`,
                   style: styles.price,
                 },
                 {
@@ -87,7 +88,7 @@ class ViewBook extends React.Component<Props> {
                   style: styles.descriptionTitle,
                 },
                 {
-                  text: selectedItem.description.descriptionBody,
+                  text: formatString(selectedItem.description.descriptionBody),
                   style: styles.description,
                 },
               ]}
