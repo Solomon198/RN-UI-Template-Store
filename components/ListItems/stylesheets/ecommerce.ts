@@ -21,6 +21,7 @@ const createStyle = (theme: theme.ApplicationTheme) => {
       flex: 1,
       marginVertical: 5,
       marginHorizontal: 5,
+      borderRadius: 20,
     },
     entityInfo: {
       paddingHorizontal: 9,

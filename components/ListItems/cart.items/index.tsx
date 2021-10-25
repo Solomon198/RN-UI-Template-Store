@@ -6,8 +6,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Icon} from 'native-base';
 import {TouchableOpacity} from 'react-native';
 
-export default function RenderEcommerceItem(props: component.ListItemProps) {
-  const entitity = props.item as ReduxStore.BookInCart;
+export default function RenderEcommerceItem(props: any) {
+  const entitity = props.item as any;
   const {styles} = createStyle(props.context);
   return (
     <TouchableOpacity
@@ -24,12 +24,14 @@ export default function RenderEcommerceItem(props: component.ListItemProps) {
         style={styles.imageContainerStyle}
       />
       <View style={styles.entityInfo}>
-        <Text style={styles.authorName}>{entitity.author}</Text>
+        {/* <Text style={styles.authorName}>{entitity.author}</Text> */}
         <Card.Section
           content={[
             {
-              text: entitity.title,
+              text: entitity.description,
               style: styles.title,
+              numberOfLines: 3,
+              ellipsizeMode: 'tail',
             },
             {
               text: `₦${formatAmountWithComma(entitity.price)}`,
@@ -84,3 +86,82 @@ export default function RenderEcommerceItem(props: component.ListItemProps) {
     </TouchableOpacity>
   );
 }
+
+// export default function RenderEcommerceItem(props: component.ListItemProps) {
+//   const entitity = props.item as ReduxStore.BookInCart;
+//   const {styles} = createStyle(props.context);
+//   return (
+//     <TouchableOpacity
+//       onPress={() => {
+//         if (props.onPress) {
+//           props.onPress(entitity);
+//         }
+//       }}
+//       disabled={!props.onPress}
+//       style={styles.card}>
+//       <Card.Section
+//         imageSource={{uri: entitity.images[0]}}
+//         imageStyle={styles.cardImage}
+//         style={styles.imageContainerStyle}
+//       />
+//       <View style={styles.entityInfo}>
+//         <Text style={styles.authorName}>{entitity.author}</Text>
+//         <Card.Section
+//           content={[
+//             {
+//               text: entitity.title,
+//               style: styles.title,
+//             },
+//             {
+//               text: `₦${formatAmountWithComma(entitity.price)}`,
+//               style: styles.price,
+//             },
+//           ]}
+//         />
+//         {!props.hideQuantityAdjustment && (
+//           <View style={styles.quantityContainer}>
+//             <View>
+//               <TouchableOpacity
+//                 onPress={() => {
+//                   if (props.adjustItemQuantity) {
+//                     props.adjustItemQuantity(entitity, false);
+//                   }
+//                 }}
+//                 style={styles.iconLeft}>
+//                 <Icon
+//                   style={styles.icon}
+//                   size={8}
+//                   name="remove"
+//                   as={MaterialIcons}
+//                 />
+//               </TouchableOpacity>
+//             </View>
+//             <View style={styles.connector} />
+//             <View style={styles.connector}>
+//               <TouchableOpacity>
+//                 <Text style={styles.quantityText}>{entitity.count}</Text>
+//               </TouchableOpacity>
+//             </View>
+//             <View style={[styles.connector]} />
+//             <View>
+//               <TouchableOpacity
+//                 onPress={() => {
+//                   if (props.adjustItemQuantity) {
+//                     props.adjustItemQuantity(entitity, true);
+//                   }
+//                 }}
+//                 style={styles.iconRight}>
+//                 <Icon
+//                   style={styles.icon}
+//                   size={8}
+//                   name="add"
+//                   as={MaterialIcons}
+//                 />
+//               </TouchableOpacity>
+//             </View>
+//           </View>
+//         )}
+//       </View>
+//     </TouchableOpacity>
+//   );
+// }

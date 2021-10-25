@@ -6,4 +6,5 @@ declare namespace entities {
   type Order = OrderProps;
   type queryParams = queryParamsProps;
   type BookCategories = BookCategoriesProps;
+  type DBuyPost = PostDbuy;
 }

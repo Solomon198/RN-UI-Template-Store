@@ -12,6 +12,24 @@ interface BookProps {
   link: string;
 }
 
+interface PostDbuy {
+  user: {
+    uuid: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+    email: string;
+    phoneNumber: string;
+    avatar: string;
+  };
+  uuid: string;
+  images: string[];
+  description: string;
+  category: string;
+  date: string;
+  price: string;
+}
+
 interface UserProps {
   firstName: string;
   lastName: string;

@@ -6,7 +6,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {NativeBaseProvider} from 'native-base';
 import ThemeProvider from '../theme/theme.ui.context';
 //Application Screen Initializers
-import IntializeLibraryScreens from '../../applications/library.application/_config_/navigation.configuration/initialize.screens';
+import IntializeLibraryScreens from '../../applications/dBuy.application/_config_/navigation.configuration/initialize.screens';
 
 export function IntializeComponentWithProviders(
   store: any,

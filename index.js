@@ -4,7 +4,7 @@
 import {LogBox} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import InitializeScreens from './app.configurations/nav.config/initialize.screens';
-import {LibraryRootNavigationConfiguration} from './applications/uBuy.application/_config_/navigation.configuration/navigationActions';
+import {LibraryRootNavigationConfiguration} from './applications/dBuy.application/_config_/navigation.configuration/navigationActions';
 InitializeScreens();
 
 LogBox.ignoreAllLogs(true);
